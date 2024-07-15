@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { NavDropdown } from 'react-bootstrap'
-import DataContext from '../DataContext'
+// import { NavDropdown } from 'react-bootstrap'
+// import DataContext from '../DataContext'
 
-const NavBar = () => {
+const Nav = () => {
     
     return (
         <div className="NavBar">
@@ -13,4 +13,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default Nav
