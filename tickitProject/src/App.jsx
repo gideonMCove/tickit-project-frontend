@@ -8,6 +8,8 @@ import Footer from './components/Footer'
 
 function App() { 
 
+  const BASE_URL = 'http://localhost:8000/'
+
   return (
     <div className = 'app'> 
       <Header />
