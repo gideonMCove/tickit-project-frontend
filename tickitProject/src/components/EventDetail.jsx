@@ -9,8 +9,9 @@ export default function EventDetail () {
     
             const getDetail = async () => {
                 try {
-                    const detailResponse = await axios.get('https://localhost:8000/')
-                    setDetails(response.data.results)
+                    const response = await axios.get('http://localhost:8000/events/')
+                    setDetails(response)
+                    console.log('response', response)
                 } catch (error) {
                     console.error('Cannot load details', error)
                 }
@@ -20,9 +21,12 @@ export default function EventDetail () {
         },[])
     return (
         <div className = "detailPage">
-            <h1>
-                Detail!
-            </h1>
+            
+                <h1>EventDetail!</h1>
+                {
+                    <h1>{details.genre}</h1>
+                }
+            
         </div>
     )
 }
