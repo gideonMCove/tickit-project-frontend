@@ -3,13 +3,22 @@ import { useNavigate } from 'react-router-dom'
 
 const SearchBar = (props) => {
 
+    console.log(props)
+    
     let navigate= useNavigate()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        props.getEvents(e)
+        props.getVenues(e)
+        navigate('/')
+    }
 
     return (
         <div className="searchBar">
         <form onSubmit={ handleSubmit }>
              <input type="text" onChange={props.handleChange} value={props.searchQuery} />
-            <button type="submit">Submit</button>
+            <button type="submit">Search</button>
          </form>
       </div>
     )
