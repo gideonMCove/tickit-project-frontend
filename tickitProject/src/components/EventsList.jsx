@@ -20,7 +20,7 @@ export default function EventList () {
     },[])
 
     const showEvent = (index) => {
-        navigate(`${index}`)
+        navigate(`${index + 1}`)
     }
     console.log('events', events)
     if (events != ""){
