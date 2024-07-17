@@ -8,9 +8,14 @@ const Main = () => {
     return(
         <div className="Main">
             <Routes>
+
                 <Route path="/" element = {<Home />}/>
                 <Route path="/events/" element={<EventList />} />
                 <Route path="/events/:id" element={<EventDetail />}/>
+                <Route path="/" element={<Home />}/>
+                <Route path="/concerts" element={<Home />}/>
+                <Route path="/sports" element={<Home />}/>
+                <Route path="/comedy" element={<Home />}/> 
                 <Route path="/venue/detail/:venueId" element={<VenueDetail />} />
             </Routes>
         </div>
