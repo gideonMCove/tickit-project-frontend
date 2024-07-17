@@ -11,7 +11,7 @@ export default function EventDetail () {
     
             const getDetail = async () => {
                 try {
-                    const response = await axios.get('http://localhost:8000/events/')
+                    const response = await axios.get(`http://localhost:8000/events/${eventId}`)
                     setDetails(response)
                     
                 } catch (error) {
