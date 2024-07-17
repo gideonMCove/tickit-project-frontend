@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import { Form } from 'react-bootstrap/lib/Navbar'
+import { Form } from 'react-bootstrap'
 // need use params, change 0 to equal id
 export default function EventDetail () {
     const [details,setDetails] = useState([""])
