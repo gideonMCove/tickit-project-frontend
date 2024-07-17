@@ -5,6 +5,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 export default function EventDetail () {
     const [details,setDetails] = useState([""])
     let { eventId } = useParams()
+    console.log('eventId', eventId)
 
     useEffect(() =>{
 
@@ -21,11 +22,11 @@ export default function EventDetail () {
             }
             getDetail()
         },[])
-        console.log('response', details.data)
+        // console.log('response', details.data)
         console.log('details', details)
-        if (details != ""){
-            console.log('artist', details.data[0].artist)
-        }
+        // if (details != ""){
+        //     console.log('artist', details.data[0].artist)
+        // }
         
         // console.log('details.artist', details.data[0].artist)
     return (
@@ -35,10 +36,10 @@ export default function EventDetail () {
                 {
                     details != "" ? (
                     <h1>
-                        {details.data[0].artist}<br />
-                        Genre: {details.data[0].genre}<br />
-                        Ticket Price: ${details.data[0].price}<br />
-                        Ticket Limit: {details.data[0].ticket_limit}
+                        {details.data.artist}<br />
+                        Genre: {details.data.genre}<br />
+                        Ticket Price: ${details.data.price}<br />
+                        Ticket Limit: {details.data.ticket_limit}
                         </h1>
                     ) : (
                         <h1>Data is not loaded</h1>
