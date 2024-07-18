@@ -11,7 +11,7 @@ export default function EventDetail () {
     const [updateShow,setUpdateShow] = useState(false)
     const [venues,setVenues] = useState(null)
     const [formData, setFormData] = useState({
-        venue: '',
+       
         artist: '',
         genre: '',
         date: '',
@@ -72,10 +72,12 @@ export default function EventDetail () {
         }
     }
     const handleUpdate = async () =>{
+        // console.log('Event ID:', eventId)
+        console.log('Form Data:', formData)
         try {
             await axios.put(`http://localhost:8000/events/${eventId}`, formData)
-            const updatedEvent = await axios.get(`http://localhost:8000/events/${id}`)
-            setDetails(updatedEvent.data)
+            // const updatedEvent = await axios.get(`http://localhost:8000/events/${eventId}`)
+            setDetails(formData)
             handleClose()
 
         } catch (error) {
@@ -90,8 +92,41 @@ export default function EventDetail () {
         })
         console.log('handleChange', formData)
     } 
+
+    const putTest = async () => {
+        console.log('Event ID:', eventId)
+        console.log(`http://localhost:8000/events/${eventId}`)
+        try {
+          const response = await axios.put(`http://localhost:8000/events/${eventId}`,
+                {
+                    // artist: "Mr. Stinky",
+                    // date: "2024-07-31T20:30:00Z",
+                    // price:  100,
+                    // ticket_limit: 8,
+                    // venue_id: 5,
+                    // genre: "indie"
+                    "venue": 1,
+                    "artist": "Mrs. Stinky",
+                    "genre": "indie",
+                    "date": "2024-07-31T20:30:00Z",
+                    "price": 100,
+                    "over18": true,
+                    "ticket_limit": 8,
+                    "image_url": "12",
+                    "venue_id": 5,
+                    "comedy": false,
+                    "concert": true,
+                    "sport": false
+                }
+            )
+
+        } catch (error ){
+            console.error('Gosh dang it')
+        }
+    }
     return (
-        <div className = "detailPage">            
+        <div className = "detailPage">
+            <button onClick={putTest}>Test</button>            
             {/* Delete Modal */}
             <Button variant='primary' onClick ={handleShow}>
                 Delete Event
@@ -192,7 +227,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.over18 ? true : false}
                                 name='over18'
-                                value={formData.over18}
+                                value={Boolean(formData.over18)}
                                 onChange={handleChange}
                                 required
                             />     
@@ -237,7 +272,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.comedy ? true : false}
                                 name='comedy'
-                                value={formData.comedy}
+                                value={Boolean(formData.comedy)}
                                 onChange={handleChange}
                                 
                             />
@@ -248,7 +283,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.concert ? true : false}
                                 name='concert'
-                                value={formData.defaultChecked}
+                                value={Boolean(formData.defaultChecked)}
                                 onChange={handleChange}
                                 required
                             />
@@ -259,7 +294,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.sport ? true : false}
                                 name='sport'
-                                value={formData.sport}
+                                value={Boolean(formData.sport)}
                                 onChange={handleChange}
                                 
                             />
@@ -281,7 +316,7 @@ export default function EventDetail () {
                 {
                     details != null ? (
                     <h1>
-                        {console.log('response', formData)}
+                        
                         {details.data.artist}<br />
                         Genre: {details.data.genre}<br />
                         Ticket Price: ${details.data.price}<br />
