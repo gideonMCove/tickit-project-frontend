@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom'
 
 const SearchBar = (props) => {
 
-    console.log(props)
+    //console.log(props)
     
     let navigate= useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         props.getEvents(e)
-        props.getVenues(e)
-        navigate('/')
+        //props.getVenues(e)
+        navigate('/events')
     }
 
     return (
