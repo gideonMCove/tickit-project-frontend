@@ -11,7 +11,7 @@ export default function EventDetail () {
     const [updateShow,setUpdateShow] = useState(false)
     const [venues,setVenues] = useState(null)
     const [formData, setFormData] = useState({
-        venue: '',
+       
         artist: '',
         genre: '',
         date: '',
@@ -35,7 +35,7 @@ export default function EventDetail () {
                     const responseData = response.data
                     {
                     setFormData({
-                        venue: responseData.venue,
+                       
                         artist: responseData.artist,
                         genre: responseData.genre,
                         date: responseData.date,
@@ -123,7 +123,7 @@ export default function EventDetail () {
             <Modal show={updateShow} onHide={handleUClose}>
                 <Modal.Body>
                     <Form onSubmit={handleUpdate}>
-                        <Form.Group controlId="formVenueName">
+                        {/* <Form.Group controlId="formVenueName">
                             <Form.Label>Venue</Form.Label>
                             <Form.Control
                                 as="select"                                
@@ -137,8 +137,8 @@ export default function EventDetail () {
                                         <option value={venue.id} key={index}>{venue.id}</option>
                                     ))
                                 }
-                                </Form.Control>
-                        </Form.Group>
+                                </Form.Control> */}
+                        {/* </Form.Group> */}
                         <Form.Group controlId="formArtist">
                             <Form.Label>Artist</Form.Label>
                             <Form.Control
@@ -192,7 +192,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.over18 ? true : false}
                                 name='over18'
-                                value={formData.over18}
+                                value={Boolean(formData.over18)}
                                 onChange={handleChange}
                                 required
                             />     
@@ -237,7 +237,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.comedy ? true : false}
                                 name='comedy'
-                                value={formData.comedy}
+                                value={Boolean(formData.comedy)}
                                 onChange={handleChange}
                                 
                             />
@@ -248,7 +248,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.concert ? true : false}
                                 name='concert'
-                                value={formData.defaultChecked}
+                                value={Boolean(formData.defaultChecked)}
                                 onChange={handleChange}
                                 required
                             />
@@ -259,7 +259,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.sport ? true : false}
                                 name='sport'
-                                value={formData.sport}
+                                value={Boolean(formData.sport)}
                                 onChange={handleChange}
                                 
                             />
@@ -281,7 +281,7 @@ export default function EventDetail () {
                 {
                     details != null ? (
                     <h1>
-                        {console.log('response', formData)}
+                        
                         {details.data.artist}<br />
                         Genre: {details.data.genre}<br />
                         Ticket Price: ${details.data.price}<br />
