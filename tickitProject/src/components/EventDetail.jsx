@@ -35,7 +35,7 @@ export default function EventDetail () {
                     const responseData = response.data
                     {
                     setFormData({
-                       
+                        venue: responseData.venue,
                         artist: responseData.artist,
                         genre: responseData.genre,
                         date: responseData.date,
@@ -72,10 +72,12 @@ export default function EventDetail () {
         }
     }
     const handleUpdate = async () =>{
+        // console.log('Event ID:', eventId)
+        console.log('Form Data:', formData)
         try {
             await axios.put(`http://localhost:8000/events/${eventId}`, formData)
-            const updatedEvent = await axios.get(`http://localhost:8000/events/${id}`)
-            setDetails(updatedEvent.data)
+            // const updatedEvent = await axios.get(`http://localhost:8000/events/${eventId}`)
+            setDetails(formData)
             handleClose()
 
         } catch (error) {
@@ -90,8 +92,41 @@ export default function EventDetail () {
         })
         console.log('handleChange', formData)
     } 
+
+    const putTest = async () => {
+        console.log('Event ID:', eventId)
+        console.log(`http://localhost:8000/events/${eventId}`)
+        try {
+          const response = await axios.put(`http://localhost:8000/events/${eventId}`,
+                {
+                    // artist: "Mr. Stinky",
+                    // date: "2024-07-31T20:30:00Z",
+                    // price:  100,
+                    // ticket_limit: 8,
+                    // venue_id: 5,
+                    // genre: "indie"
+                    "venue": 1,
+                    "artist": "Mrs. Stinky",
+                    "genre": "indie",
+                    "date": "2024-07-31T20:30:00Z",
+                    "price": 100,
+                    "over18": true,
+                    "ticket_limit": 8,
+                    "image_url": "12",
+                    "venue_id": 5,
+                    "comedy": false,
+                    "concert": true,
+                    "sport": false
+                }
+            )
+
+        } catch (error ){
+            console.error('Gosh dang it')
+        }
+    }
     return (
-        <div className = "detailPage">            
+        <div className = "detailPage">
+            <button onClick={putTest}>Test</button>            
             {/* Delete Modal */}
             <Button variant='primary' onClick ={handleShow}>
                 Delete Event
@@ -123,7 +158,7 @@ export default function EventDetail () {
             <Modal show={updateShow} onHide={handleUClose}>
                 <Modal.Body>
                     <Form onSubmit={handleUpdate}>
-                        {/* <Form.Group controlId="formVenueName">
+                        <Form.Group controlId="formVenueName">
                             <Form.Label>Venue</Form.Label>
                             <Form.Control
                                 as="select"                                
@@ -137,8 +172,8 @@ export default function EventDetail () {
                                         <option value={venue.id} key={index}>{venue.id}</option>
                                     ))
                                 }
-                                </Form.Control> */}
-                        {/* </Form.Group> */}
+                                </Form.Control>
+                        </Form.Group>
                         <Form.Group controlId="formArtist">
                             <Form.Label>Artist</Form.Label>
                             <Form.Control
