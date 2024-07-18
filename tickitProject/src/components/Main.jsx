@@ -1,3 +1,4 @@
+import React from 'react'
 import { Route, Routes} from 'react-router-dom'
 import Home from './Home'
 import EventsList from './EventsList'
@@ -6,6 +7,7 @@ import VenueDetail from './VenueDetail'
 import ConcertsList from './ConcertsList'
 import SportsList from './SportsList'
 import ComedyList from './ComedyList'
+import './Main.css'
 
 const Main = (props) => {
 

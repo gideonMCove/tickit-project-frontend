@@ -30,17 +30,17 @@ const ComedyList = () => {
    
     return (
         <div className='EventList'>
-            <h1>Upcoming Events</h1>
+            <h2>Upcoming Events</h2>
             {
                 comedy.length > 0 ? (
                     comedy.map((event, index) => (
-                        <h1 className="map" key={index} onClick={()=>showEvent(event.id)}>
+                        <h3 className="map" key={index} onClick={()=>showEvent(event.id)}>
                         <ul>
                             {event.artist}
                         </ul>
-                    </h1>
+                        </h3>
                     ) )
-                ) : <h1>Events loading</h1>
+                ) : <h2>Events loading</h2>
             }
         </div>
     )
