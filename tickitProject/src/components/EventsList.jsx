@@ -20,7 +20,7 @@ export default function EventList () {
     },[])
 
     const showEvent = (index) => {
-        navigate(`${index + 1}`)
+        navigate(`${index }`)
     }
     console.log('events', events)
     if (events != ""){
@@ -37,7 +37,7 @@ export default function EventList () {
                     
                     events.data.map((event, index) => (
                         
-                        <h1 className="map" key ={index} onClick={()=>showEvent(index)}>
+                        <h1 className="map" key ={index} onClick={()=>showEvent(event.id)}>
                             {console.log('event',event)}
                             <ul>
                                 {event.artist}
