@@ -30,7 +30,7 @@ export default function EventsList (props) {
     //console.log(events)
 
     const showEvent = (index) => {
-        navigate(`${index + 1}`)
+        navigate(`${index }`)
     }
 
     // console.log('events', events)
@@ -42,10 +42,14 @@ export default function EventsList (props) {
         <div className = "EventList">
             <h1>Upcoming Events</h1>
             {
-                props.events.length > 0 ? (                    
-                    props.events.map((event, index) => (                        
-                        <h1 className="map" key={index} onClick={()=>showEvent(index)}>
-                            {console.log('event', event)}
+
+                events != "" ? (
+                    
+                    events.data.map((event, index) => (
+                        
+                        <h1 className="map" key ={index} onClick={()=>showEvent(event.id)}>
+                            {console.log('event',event)}
+
                             <ul>
                                 {event.artist}
                             </ul>
