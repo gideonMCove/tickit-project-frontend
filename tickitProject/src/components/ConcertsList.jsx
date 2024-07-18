@@ -16,14 +16,13 @@ const ConcertsList = () => {
           console.log(matchingEvents)
           setConcerts(matchingEvents)          
         } catch (error) {
-          console.error('Cannot load venues', error)
+          console.error('Cannot load events', error)
         }
-      }
+    }
 
     const showEvent = (index) => {
-        navigate(`/events/${index + 1}`)
-    }
-  
+        navigate(`/events/${index}`)
+    }  
 
     useEffect(() => {
         getConcerts()
@@ -35,7 +34,7 @@ const ConcertsList = () => {
             {
                 concerts.length > 0 ? (
                     concerts.map((event, index) => (
-                        <h1 className="map" key={index} onClick={()=>showEvent(index)}>
+                        <h1 className="map" key={index} onClick={()=>showEvent(event.id)}>
                         <ul>
                             {event.artist}
                         </ul>
