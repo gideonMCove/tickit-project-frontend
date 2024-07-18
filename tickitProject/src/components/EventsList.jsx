@@ -12,9 +12,7 @@ export default function EventsList (props) {
 
     const showVenue = (index) => {
         navigate(`/venue/detail/${index}`)
-    }
-
-    
+    }    
 
     return (
         <div className = "EventList">
