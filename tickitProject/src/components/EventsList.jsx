@@ -2,41 +2,41 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-export default function EventsList (props) {
+export default function EventsList () {
 
-    //const [events, setEvents] = useState([])
+    const [events, setEvents] = useState([])
     let {eventId} = useParams()
     let navigate = useNavigate()
 
-    console.log('EventsList', props.events)
+    
 
-    // useEffect (() => {
+    useEffect (() => {
 
-    //     console.log('useEffect')
+        console.log('useEffect')
 
-    //     setEvents(props.events)
+     
         
-    //     // const getEvents = async () => {
-    //     //     try{
-    //     //         const response = await axios.get(`http://localhost:8000/events/`)
-    //     //         setEvents(response)
-    //     //     } catch (error){
-    //     //         console.error('Cannot load events', error)
-    //     //     }
-    //     // }
-    //     // getEvents()
-    // },[events])
+        const getEvents = async () => {
+            try{
+                const response = await axios.get(`http://localhost:8000/events/`)
+                setEvents(response)
+            } catch (error){
+                console.error('Cannot load events', error)
+            }
+        }
+        getEvents()
+    },[events])
 
-    //console.log(events)
+    console.log(events)
 
     const showEvent = (index) => {
         navigate(`${index }`)
     }
 
-    // console.log('events', events)
-    // if (events != ""){
-    //     console.log('events.data', events.data)
-    // }
+    console.log('events', events)
+    if (events != ""){
+        console.log('events.data', events.data)
+    }
 
     return (
         <div className = "EventList">
@@ -47,7 +47,7 @@ export default function EventsList (props) {
                     
                     events.data.map((event, index) => (
                         
-                        <h1 className="map" key ={index} onClick={()=>showEvent(event.id)}>
+                        <h1 className="map" key ={index} onClick={()=>showEvent(event.id)} >
                             {console.log('event',event)}
 
                             <ul>
