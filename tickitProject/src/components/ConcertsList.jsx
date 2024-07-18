@@ -16,10 +16,11 @@ const ConcertsList = () => {
           console.log(matchingEvents)
           setConcerts(matchingEvents)          
         } catch (error) {
-          console.error('Cannot load venues', error)
+          console.error('Cannot load events', error)
         }
-      }
+    }
 
+    //not finished
     const showEvent = (index) => {
         navigate(`/events/${index + 1}`)
     }
