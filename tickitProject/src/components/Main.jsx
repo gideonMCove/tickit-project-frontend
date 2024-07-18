@@ -14,9 +14,8 @@ const Main = (props) => {
     return(
         <div className="Main">
             <Routes>
-
                 <Route path="/" element = {<Home />}/>
-                <Route path="/events/" element={<EventsList events={props.events}/>} />
+                <Route path="/events/" element={<EventsList events={props.events} venues={props.venues}/>} />
                 <Route path="/events/:eventId" element={<EventDetail />}/>
                 <Route path="/" element={<Home />}/>
                 <Route path="/concerts" element={<ConcertsList />}/>

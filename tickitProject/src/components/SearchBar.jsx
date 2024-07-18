@@ -11,7 +11,7 @@ const SearchBar = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         props.getEvents(e)
-        //props.getVenues(e)
+        props.getVenues(e)
         navigate('/events')
     }
 
