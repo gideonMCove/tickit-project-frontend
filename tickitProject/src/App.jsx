@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
@@ -24,9 +25,11 @@ function App() {
   const getEvents = async (e) => {
     e.preventDefault()     
     try {
-      const res = await axios.get(`${BASE_URL}/events/${searchQuery}`)
-      setEvents(res)
-      console.log('response', res.data)
+      const res = await axios.get(`${BASE_URL}/events`)
+      let eventData = res.data
+      const matchingEvents = eventData.filter(event => event.artist.toLowerCase().includes(searchQuery.toLocaleLowerCase()))
+      console.log(matchingEvents)
+      setEvents(matchingEvents)
     } catch (error) {
       console.error('Cannot load events', error)
     }
