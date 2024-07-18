@@ -19,10 +19,9 @@ const ComedyList = () => {
           console.error('Cannot load events', error)
         }
     }
-   
-       //not finished
+
     const showEvent = (index) => {
-        navigate(`/events/${index + 1}`)
+        navigate(`/events/${index}`)
     }
 
     useEffect(() => {
@@ -35,7 +34,7 @@ const ComedyList = () => {
             {
                 comedy.length > 0 ? (
                     comedy.map((event, index) => (
-                        <h1 className="map" key={index} onClick={()=>showEvent(index)}>
+                        <h1 className="map" key={index} onClick={()=>showEvent(event.id)}>
                         <ul>
                             {event.artist}
                         </ul>

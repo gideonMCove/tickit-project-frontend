@@ -31,8 +31,10 @@ function App() {
     try {
       const res = await axios.get(`${BASE_URL}/events`)
       let eventData = res.data
+      console.log('Got all events:', eventData)
 
       const matchingEvents = eventData.filter(event => event.artist.toLowerCase().includes(searchQuery.toLowerCase()))
+      console.log('These events match:', matchingEvents)
       setEvents(matchingEvents)
 
       const concertEvents = eventData.filter(event => event.concert === true)
