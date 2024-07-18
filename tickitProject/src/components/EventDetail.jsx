@@ -1,44 +1,281 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
-// need use params, change 0 to equal id
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import { Form } from 'react-bootstrap'
+
 export default function EventDetail () {
-    const [details,setDetails] = useState([""])
+    const [details,setDetails] = useState(null)
+    const [show,setShow] = useState(false)
+    const [updateShow,setUpdateShow] = useState(false)
+    const [venues,setVenues] = useState(null)
+    const [formData, setFormData] = useState({
+        venue: '',
+        artist: '',
+        genre: '',
+        date: '',
+        price: '',
+        over18: false,
+        ticket_limit: '',
+        image_url: '',
+        venue_id: '',
+        comedy: false,
+        concert: false,
+        sport: false
+    })
     let { eventId } = useParams()
-
-    useEffect(() =>{
-
-    
+    const navigate = useNavigate()
+    useEffect(() =>{    
             const getDetail = async () => {
                 try {
-                    const response = await axios.get('http://localhost:8000/events/')
+                    const response = await axios.get(`http://localhost:8000/events/${eventId}`)
                     setDetails(response)
                     
+                    const responseData = response.data
+                    {
+                    setFormData({
+                        venue: responseData.venue,
+                        artist: responseData.artist,
+                        genre: responseData.genre,
+                        date: responseData.date,
+                        price: responseData.price,
+                        over18: responseData.over18,
+                        ticket_limit: responseData.ticket_limit,
+                        image_url: responseData.image_url,
+                        venue_id: responseData.venue_id,
+                        comedy: responseData.comedy,
+                        concert: responseData.concert,
+                        sport: responseData.sport
+                        })
+                    }
+                    const venueResponse = await axios.get(`http://localhost:8000/venues`)
+                    setVenues(venueResponse)
+
                 } catch (error) {
                     console.error('Cannot load details', error)
-                }
-                
+                }                
             }
             getDetail()
         },[])
-        console.log('response', details.data)
-        console.log('details', details)
-        if (details != ""){
-            console.log('artist', details.data[0].artist)
+   
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    const handleUClose = () => setUpdateShow(false)
+    const handleUShow = () => setUpdateShow(true)
+    const handleDelete = async () =>{
+        try {
+            await axios.delete(`http://localhost:8000/events/${eventId}`)
+            navigate('/events')
+        } catch (error) {
+            console.error(`nah nah nah nah, nah nah, nah nah, can't delete this`)
         }
-        
-        // console.log('details.artist', details.data[0].artist)
+    }
+    const handleUpdate = async () =>{
+        try {
+            await axios.put(`http://localhost:8000/events/${eventId}`, formData)
+            const updatedEvent = await axios.get(`http://localhost:8000/events/${id}`)
+            setDetails(updatedEvent.data)
+            handleClose()
+
+        } catch (error) {
+            console.error('Error updating event!!!!')
+        }
+    }
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+        console.log('handleChange', formData)
+    } 
     return (
-        <div className = "detailPage">
-            
+        <div className = "detailPage">            
+            {/* Delete Modal */}
+            <Button variant='primary' onClick ={handleShow}>
+                Delete Event
+            </Button>
+            {
+                details != null ? (
+            <Modal show={show} onHide={handleClose}>                
+                <Modal.Body>Are you sure you would like to delete this event? This process can not be reversed</Modal.Body>
+                <Modal.Footer>
+                    <Button variant ='secondary' onClick ={handleClose}>
+                        Cancel
+                    </Button>
+                    <Button variant='primary' onClick={handleDelete}>
+                        DELETE
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+                ) : (
+                    <h1></h1>
+                )
+            }
+            {/*Update Modal*/}
+            <Button variant='primary' onClick ={handleUShow}>
+                Update Event
+            </Button>
+
+            {
+                details!= null && venues != null ? ( 
+            <Modal show={updateShow} onHide={handleUClose}>
+                <Modal.Body>
+                    <Form onSubmit={handleUpdate}>
+                        <Form.Group controlId="formVenueName">
+                            <Form.Label>Venue</Form.Label>
+                            <Form.Control
+                                as="select"                                
+                                name="venue"
+                                value={FormData.venue}
+                                onChange={handleChange}
+                                required
+                            >
+                                {
+                                    venues.data.map((venue, index )=> (
+                                        <option value={venue.id} key={index}>{venue.id}</option>
+                                    ))
+                                }
+                                </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="formArtist">
+                            <Form.Label>Artist</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="artist"
+                                value={FormData.artist}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group controlId='formGenre'>
+                            <Form.Label>Genre</Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='genre'
+                                value={FormData.genre}
+                                onChange={handleChange}
+                                required
+                            />     
+                        </Form.Group>
+                        <Form.Group controlId='formDate'>
+                            <Form.Label>Date</Form.Label>
+                            <Form.Control
+                             type='text'
+                             name='genre'
+                             value={FormData.genre}
+                             onChange={handleChange}
+                             required
+                                // type='date'
+                                // name='date'
+                                // min="2024-07-19"
+                                // max="2025-07-19"
+                                // value={FormData.date}
+                                // onChange={handleChange}
+                                // required
+                            />                                 
+                        </Form.Group>
+                        <Form.Group controlId='formPrice'>
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                type='number'
+                                name='price'
+                                value={FormData.price}
+                                onChange={handleChange}
+                                required
+                            />     
+                        </Form.Group>
+                        <Form.Group controlId='formOver18'>
+                            <Form.Label>Over 18?</Form.Label>
+                            <Form.Check
+                                type='checkbox'
+                                defaultChecked={details.data.over18 ? true : false}
+                                name='over18'
+                                value={FormData.over18}
+                                onChange={handleChange}
+                                required
+                            />     
+                        </Form.Group>
+                        <Form.Group controlId='formTicket_limit'>
+                            <Form.Label>Ticket Limit</Form.Label>
+                            <Form.Control
+                                type='number'
+                                name='ticket_limit'
+                                value={FormData.ticket_limit}
+                                onChange={handleChange}
+                                required
+                            />     
+                        </Form.Group>
+                        <Form.Group controlId='formImage_url'>
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='image_url'
+                                value={FormData.image_url}
+                                onChange={handleChange}
+                                required
+                            />     
+                        </Form.Group>
+                        <Form.Group controlId='formVenue_id'>
+                            <Form.Label>id</Form.Label>
+                            <Form.Control type="text" value={FormData.venue_id} onChange={(e) => setFormData(e.target.value)}  />
+                        </Form.Group>
+                        <Form.Group controlId='formComedy'>
+                            <Form.Label>Is Comedy?</Form.Label>
+                            <Form.Check
+                                type='checkbox'
+                                defaultChecked={details.data.comedy ? true : false}
+                                name='comedy'
+                                value={FormData.comedy}
+                                onChange={handleChange}
+                                
+                            />
+                        </Form.Group>
+                        <Form.Group controlId='formConcert'>
+                            <Form.Label>Is Concert?</Form.Label>
+                            <Form.Check
+                                type='checkbox'
+                                defaultChecked={details.data.concert ? true : false}
+                                name='concert'
+                                value={FormData.concert}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group controlId='formSport'>
+                            <Form.Label>Is Sport?</Form.Label>
+                            <Form.Check
+                                type='checkbox'
+                                defaultChecked={details.data.sport ? true : false}
+                                name='sport'
+                                value={FormData.sport}
+                                onChange={handleChange}
+                                
+                            />
+                        </Form.Group>
+                        <Button variant='primary' onClick={handleUpdate}>
+                            Save Changes
+                        </Button>
+                        <Button variant ='secondary' onClick={handleUClose}>
+                            Cancel
+                            </Button>               
+                    </Form>
+                </Modal.Body>
+            </Modal>
+                ) : (
+                    <h1></h1>
+                )
+}
                 <h1>EventDetail!</h1>
                 {
-                    details != "" ? (
+                    details != null ? (
                     <h1>
-                        {details.data[0].artist}<br />
-                        Genre: {details.data[0].genre}<br />
-                        Ticket Price: ${details.data[0].price}<br />
-                        Ticket Limit: {details.data[0].ticket_limit}
+                        {console.log('response', formData)}
+                        {details.data.artist}<br />
+                        Genre: {details.data.genre}<br />
+                        Ticket Price: ${details.data.price}<br />
+                        Ticket Limit: {details.data.ticket_limit}
                         </h1>
                     ) : (
                         <h1>Data is not loaded</h1>
