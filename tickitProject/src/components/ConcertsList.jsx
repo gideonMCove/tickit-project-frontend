@@ -23,8 +23,7 @@ const ConcertsList = () => {
     //not finished
     const showEvent = (index) => {
         navigate(`/events/${index + 1}`)
-    }
-  
+    }  
 
     useEffect(() => {
         getConcerts()
