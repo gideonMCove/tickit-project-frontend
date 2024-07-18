@@ -16,13 +16,13 @@ export default function EventDetail () {
         genre: '',
         date: '',
         price: '',
-        over18: false,
+        over18: true,
         ticket_limit: '',
         image_url: '',
         venue_id: '',
-        comedy: false,
-        concert: false,
-        sport: false
+        comedy: true,
+        concert: true,
+        sport: true
     })
     let { eventId } = useParams()
     const navigate = useNavigate()
@@ -218,9 +218,19 @@ export default function EventDetail () {
                             />     
                         </Form.Group>
                         <Form.Group controlId='formVenue_id'>
+                            <Form.Label>Venue ID</Form.Label>
+                            <Form.Control
+                                type='number'
+                                name='venue_id'
+                                value={FormData.ticket_limit}
+                                onChange={handleChange}
+                                required
+                            />     
+                        </Form.Group>
+                        {/* <Form.Group controlId='formVenue_id'>
                             <Form.Label>id</Form.Label>
                             <Form.Control type="text" value={FormData.venue_id} onChange={(e) => setFormData(e.target.value)}  />
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group controlId='formComedy'>
                             <Form.Label>Is Comedy?</Form.Label>
                             <Form.Check
@@ -238,7 +248,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.concert ? true : false}
                                 name='concert'
-                                value={FormData.concert}
+                                value={FormData.defaultChecked}
                                 onChange={handleChange}
                                 required
                             />
