@@ -128,7 +128,7 @@ export default function EventDetail () {
                             <Form.Control
                                 as="select"                                
                                 name="venue"
-                                value={FormData.venue}
+                                value={formData.venue}
                                 onChange={handleChange}
                                 required
                             >
@@ -144,7 +144,7 @@ export default function EventDetail () {
                             <Form.Control
                                 type="text"
                                 name="artist"
-                                value={FormData.artist}
+                                value={formData.artist}
                                 onChange={handleChange}
                                 required
                             />
@@ -154,7 +154,7 @@ export default function EventDetail () {
                             <Form.Control
                                 type='text'
                                 name='genre'
-                                value={FormData.genre}
+                                value={formData.genre}
                                 onChange={handleChange}
                                 required
                             />     
@@ -163,8 +163,8 @@ export default function EventDetail () {
                             <Form.Label>Date</Form.Label>
                             <Form.Control
                              type='text'
-                             name='genre'
-                             value={FormData.genre}
+                             name='date'
+                             value={formData.date}
                              onChange={handleChange}
                              required
                                 // type='date'
@@ -181,7 +181,7 @@ export default function EventDetail () {
                             <Form.Control
                                 type='number'
                                 name='price'
-                                value={FormData.price}
+                                value={formData.price}
                                 onChange={handleChange}
                                 required
                             />     
@@ -192,7 +192,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.over18 ? true : false}
                                 name='over18'
-                                value={FormData.over18}
+                                value={formData.over18}
                                 onChange={handleChange}
                                 required
                             />     
@@ -202,7 +202,7 @@ export default function EventDetail () {
                             <Form.Control
                                 type='number'
                                 name='ticket_limit'
-                                value={FormData.ticket_limit}
+                                value={formData.ticket_limit}
                                 onChange={handleChange}
                                 required
                             />     
@@ -212,7 +212,7 @@ export default function EventDetail () {
                             <Form.Control
                                 type='text'
                                 name='image_url'
-                                value={FormData.image_url}
+                                value={formData.image_url}
                                 onChange={handleChange}
                                 required
                             />     
@@ -222,7 +222,7 @@ export default function EventDetail () {
                             <Form.Control
                                 type='number'
                                 name='venue_id'
-                                value={FormData.ticket_limit}
+                                value={formData.venue_id}
                                 onChange={handleChange}
                                 required
                             />     
@@ -237,7 +237,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.comedy ? true : false}
                                 name='comedy'
-                                value={FormData.comedy}
+                                value={formData.comedy}
                                 onChange={handleChange}
                                 
                             />
@@ -248,7 +248,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.concert ? true : false}
                                 name='concert'
-                                value={FormData.defaultChecked}
+                                value={formData.defaultChecked}
                                 onChange={handleChange}
                                 required
                             />
@@ -259,7 +259,7 @@ export default function EventDetail () {
                                 type='checkbox'
                                 defaultChecked={details.data.sport ? true : false}
                                 name='sport'
-                                value={FormData.sport}
+                                value={formData.sport}
                                 onChange={handleChange}
                                 
                             />
