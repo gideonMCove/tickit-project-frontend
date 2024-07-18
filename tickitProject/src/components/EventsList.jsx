@@ -7,14 +7,12 @@ export default function EventsList (props) {
      let navigate = useNavigate()
 
     const showEvent = (index) => {
-        navigate(`${index}`)
+        navigate(`/events/${index}`)
     }
 
     const showVenue = (index) => {
-        navigate(`/venue/detail/${index}`)
-    }
-
-    
+        navigate(`/venue/${index}`)
+    }    
 
     return (
         <div className = "EventList">

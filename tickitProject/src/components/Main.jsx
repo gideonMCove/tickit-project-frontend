@@ -15,13 +15,12 @@ const Main = (props) => {
         <div className="Main">
             <Routes>
                 <Route path="/" element = {<Home />}/>
-                <Route path="/events/" element={<EventsList events={props.events} venues={props.venues}/>} />
+                <Route path="/results" element={<EventsList events={props.events} venues={props.venues}/>} />
                 <Route path="/events/:eventId" element={<EventDetail />}/>
-                <Route path="/" element={<Home />}/>
+                <Route path="/venues/:venueId" element={<VenueDetail />} />
                 <Route path="/concerts" element={<ConcertsList />}/>
                 <Route path="/sports" element={<SportsList />}/>
-                <Route path="/comedy" element={<ComedyList />}/> 
-                <Route path="/venue/detail/:venueId" element={<VenueDetail />} />
+                <Route path="/comedy" element={<ComedyList />}/>                 
             </Routes>
         </div>
     )
