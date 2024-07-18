@@ -1,51 +1,27 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-export default function EventsList () {
+export default function EventsList (props) {
 
-    const [events, setEvents] = useState([])
-    let {eventId} = useParams()
-    let navigate = useNavigate()
+    console.log(props)
 
-    
-
-    useEffect (() => {
-
-        console.log('useEffect')
-
-     
-        
-        const getEvents = async () => {
-            try{
-                const response = await axios.get(`http://localhost:8000/events/`)
-                setEvents(response)
-            } catch (error){
-                console.error('Cannot load events', error)
-            }
-        }
-        getEvents()
-    },[events])
-
-    console.log(events)
+     let navigate = useNavigate()
 
     const showEvent = (index) => {
-        navigate(`${index }`)
+        navigate(`${index}`)
     }
 
-    console.log('events', events)
-    if (events != ""){
-        console.log('events.data', events.data)
-    }
+    const showVenue = (index) => {
+        navigate(`/venue/detail/${index}`)
+    }    
 
     return (
         <div className = "EventList">
-            <h1>Upcoming Events</h1>
+            <h1>Search results</h1>
+            <h2>Events</h2>
             {
-
-                events != "" ? (
+                props.events.length > 0 ? (
                     
-                    events.data.map((event, index) => (
+                    props.events.map((event, index) => (
                         
                         <h1 className="map" key ={index} onClick={()=>showEvent(event.id)} >
                             {console.log('event',event)}
@@ -56,9 +32,28 @@ export default function EventsList () {
                         </h1>
                     ))
                 ) : (
-                    <h1>Events have yet to be loaded</h1>
+                    <h2>Loading events</h2>
                 )
             }
+            <h2>Venues</h2>
+            {
+                props.venues.length > 0 ? (
+                    
+                    props.venues.map((venue, index) => (
+                        
+                        <h1 className="map" key ={index} onClick={()=>showVenue(venue.id)} >
+                            {console.log('venue',venue)}
+
+                            <ul>
+                                {venue.name}
+                            </ul>
+                        </h1>
+                    ))
+                ) : (
+                    <h2>Loading venues</h2>
+                )
+            }
+
         </div>
     )
 }

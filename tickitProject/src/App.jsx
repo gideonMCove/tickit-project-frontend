@@ -29,7 +29,6 @@ function App() {
       const res = await axios.get(`${BASE_URL}/events`)
       let eventData = res.data
       console.log('Got all events:', eventData)
-
       const matchingEvents = eventData.filter(event => event.artist.toLowerCase().includes(searchQuery.toLowerCase()))
       console.log('These events match:', matchingEvents)
       setEvents(matchingEvents)
@@ -44,11 +43,9 @@ function App() {
       const res = await axios.get(`${BASE_URL}/venues`)
       let venueData = res.data
       console.log('Got all venues:', venueData)
-
-
-
-      setVenues(res)
-      console.log('response', res.data)
+      const matchingVenues = venueData.filter(venue => venue.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      console.log('These venues match:', matchingVenues)
+      setVenues(matchingVenues)
     } catch (error) {
       console.error('Cannot load venues', error)
     }
