@@ -1,0 +1,43 @@
+body {
+    font-family: "Josefin Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.searchBar form {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.searchBar input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 16px;
+    flex-grow: 1;
+}
+
+.searchBar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.searchBar button:hover {
+    background-color: #0056b3;
+}
