@@ -7,7 +7,6 @@ import VenueDetail from './VenueDetail'
 import ConcertsList from './ConcertsList'
 import SportsList from './SportsList'
 import ComedyList from './ComedyList'
-import './Main.css'
 
 const Main = (props) => {
 

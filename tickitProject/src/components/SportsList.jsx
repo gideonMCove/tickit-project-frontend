@@ -36,6 +36,7 @@ const SportsList = () => {
                     sports.map((event, index) => (
                         <h3 className="map" key={index} onClick={()=>showEvent(event.id)}>
                         <ul>
+                            <img src={event.image_url}/>
                             {event.artist}
                         </ul>
                     </h3>
