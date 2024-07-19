@@ -79,6 +79,7 @@ export default function EventDetail () {
             // const updatedEvent = await axios.get(`http://localhost:8000/events/${eventId}`)
             setDetails(formData)
             handleClose()
+            window.location.reload()
 
         } catch (error) {
             console.error('Error updating event!!!!')
@@ -93,11 +94,11 @@ export default function EventDetail () {
         console.log('handleChange', formData)
     } 
 
-    const putTest = async () => {
+    const postTest = async () => {
         console.log('Event ID:', eventId)
         console.log(`http://localhost:8000/events/${eventId}`)
         try {
-          const response = await axios.put(`http://localhost:8000/events/${eventId}`,
+          const response = await axios.post(`http://localhost:8000/events/`,
                 {
                     // artist: "Mr. Stinky",
                     // date: "2024-07-31T20:30:00Z",
@@ -126,7 +127,7 @@ export default function EventDetail () {
     }
     return (
         <div className = "detailPage">
-            <button onClick={putTest}>Test</button>            
+            <button onClick={postTest}>Test</button>            
             {/* Delete Modal */}
             <Button variant='primary' onClick ={handleShow}>
                 Delete Event
@@ -304,7 +305,7 @@ export default function EventDetail () {
                         </Button>
                         <Button variant ='secondary' onClick={handleUClose}>
                             Cancel
-                            </Button>               
+                        </Button>               
                     </Form>
                 </Modal.Body>
             </Modal>
