@@ -1,6 +1,9 @@
+
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import './EventList.css'
+
 
 export default function EventsList (props) {
 
@@ -30,6 +33,7 @@ export default function EventsList (props) {
     //console.log(events)
 
     const showEvent = (index) => {
+
         navigate(`${index }`)
     }
 
@@ -41,6 +45,33 @@ export default function EventsList (props) {
     return (
         <div className = "EventList">
             <h1>Upcoming Events</h1>
+
+        navigate(`/events/${index}`)
+    }
+
+    const showVenue = (index) => {
+        navigate(`/venue/${index}`)
+    }   
+    
+    const formatDate = (dateStr) => {
+        let date = new Date(dateStr)
+        let formattedDate = date.toLocaleString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+          })
+          return formattedDate
+    }
+
+    return (
+        <div className = "EventList">
+            <h2>Search results</h2>
+            <h2>Events</h2>
+
             {
 
                 props.events.length > 0 ? (
@@ -51,7 +82,9 @@ export default function EventsList (props) {
                             {console.log('event',event)}
 
                             <ul>
+                                <img src={event.image_url}/>
                                 {event.artist}
+                                {formatDate(event.date)}
                             </ul>
                         </h1>
                     ))
