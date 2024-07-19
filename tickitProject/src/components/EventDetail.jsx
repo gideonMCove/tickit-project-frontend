@@ -94,11 +94,11 @@ export default function EventDetail () {
         console.log('handleChange', formData)
     } 
 
-    const putTest = async () => {
+    const postTest = async () => {
         console.log('Event ID:', eventId)
         console.log(`http://localhost:8000/events/${eventId}`)
         try {
-          const response = await axios.put(`http://localhost:8000/events/${eventId}`,
+          const response = await axios.post(`http://localhost:8000/events/`,
                 {
                     // artist: "Mr. Stinky",
                     // date: "2024-07-31T20:30:00Z",
@@ -127,7 +127,7 @@ export default function EventDetail () {
     }
     return (
         <div className = "detailPage">
-            <button onClick={putTest}>Test</button>            
+            <button onClick={postTest}>Test</button>            
             {/* Delete Modal */}
             <Button variant='primary' onClick ={handleShow}>
                 Delete Event
