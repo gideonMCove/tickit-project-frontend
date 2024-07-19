@@ -94,40 +94,40 @@ export default function EventDetail () {
         console.log('handleChange', formData)
     } 
 
-    const postTest = async () => {
-        console.log('Event ID:', eventId)
-        console.log(`http://localhost:8000/events/${eventId}`)
-        try {
-          const response = await axios.post(`http://localhost:8000/events/`,
-                {
-                    // artist: "Mr. Stinky",
-                    // date: "2024-07-31T20:30:00Z",
-                    // price:  100,
-                    // ticket_limit: 8,
-                    // venue_id: 5,
-                    // genre: "indie"
-                    "venue": 1,
-                    "artist": "Mrs. Stinky",
-                    "genre": "indie",
-                    "date": "2024-07-31T20:30:00Z",
-                    "price": 100,
-                    "over18": true,
-                    "ticket_limit": 8,
-                    "image_url": "12",
-                    "venue_id": 5,
-                    "comedy": false,
-                    "concert": true,
-                    "sport": false
-                }
-            )
+    // const postTest = async () => {
+    //     console.log('Event ID:', eventId)
+    //     console.log(`http://localhost:8000/events/${eventId}`)
+    //     try {
+    //       const response = await axios.post(`http://localhost:8000/events/`,
+    //             {
+    //                 // artist: "Mr. Stinky",
+    //                 // date: "2024-07-31T20:30:00Z",
+    //                 // price:  100,
+    //                 // ticket_limit: 8,
+    //                 // venue_id: 5,
+    //                 // genre: "indie"
+    //                 "venue": 1,
+    //                 "artist": "Mrs. Stinky",
+    //                 "genre": "indie",
+    //                 "date": "2024-07-31T20:30:00Z",
+    //                 "price": 100,
+    //                 "over18": true,
+    //                 "ticket_limit": 8,
+    //                 "image_url": "12",
+    //                 "venue_id": 5,
+    //                 "comedy": false,
+    //                 "concert": true,
+    //                 "sport": false
+    //             }
+    //         )
 
-        } catch (error ){
-            console.error('Gosh dang it')
-        }
-    }
+    //     } catch (error ){
+    //         console.error('Gosh dang it')
+    //     }
+    // }
     return (
         <div className = "detailPage">
-            <button onClick={postTest}>Test</button>            
+                      
             {/* Delete Modal */}
             <Button variant='primary' onClick ={handleShow}>
                 Delete Event
