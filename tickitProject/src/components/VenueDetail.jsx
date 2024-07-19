@@ -22,6 +22,7 @@ export default function EventDetail () {
     })
     let { venueId } = useParams()
     const navigate = useNavigate()
+    let counter = 0
     useEffect(() =>{    
             const getDetail = async () => {
                 try {
@@ -48,7 +49,7 @@ export default function EventDetail () {
                 }                
             }
             getDetail()
-        },[])
+        },[counter])
    
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
@@ -66,10 +67,15 @@ export default function EventDetail () {
         // console.log('Event ID:', eventId)
         console.log('Form Data:', formData)
         try {
+            Boolean(formData.parking)
+            console.log('Parking', formData.parking)
             await axios.put(`http://localhost:8000/venues/${venueId}`, formData)
             // const updatedEvent = await axios.get(`http://localhost:8000/events/${eventId}`)
             setDetails(formData)
             handleClose()
+            window.location.reload()
+            counter +=1
+
 
         } catch (error) {
             console.error('Error updating venue!!!!')
@@ -145,7 +151,7 @@ export default function EventDetail () {
             </Button>
 
             {
-                details!= null && venues != null ? ( 
+                details!= null && events != null ? ( 
             <Modal show={updateShow} onHide={handleUClose}>
                 <Modal.Body>
                     <Form onSubmit={handleUpdate}>
@@ -161,7 +167,7 @@ export default function EventDetail () {
                                 {
                                     events.data.map((event, index )=> (
                                         <option value={event.id} key={index}>
-                                            {event.name}
+                                            {event.artist}
                                             </option>
                                     ))
                                 }
@@ -215,43 +221,14 @@ export default function EventDetail () {
                                 required
                             />     
                         </Form.Group>
-                        <Form.Group controlId='formPrice'>
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control
-                                type='number'
-                                name='price'
-                                value={formData.price}
-                                onChange={handleChange}
-                                required
-                            />     
-                        </Form.Group>
-                        <Form.Group controlId='formImage_url'>
-                            <Form.Label>Image</Form.Label>
-                            <Form.Control
-                                type='text'
-                                name='image_url'
-                                value={formData.image_url}
-                                onChange={handleChange}
-                                required
-                            />     
-                        </Form.Group>
-                        <Form.Group controlId='formVenue_id'>
-                            <Form.Label>Venue ID</Form.Label>
-                            <Form.Control
-                                type='number'
-                                name='venue_id'
-                                value={formData.venue_id}
-                                onChange={handleChange}
-                                required
-                            />     
-                        </Form.Group>
+                       
                         
                         <Button variant='primary' onClick={handleUpdate}>
                             Save Changes
                         </Button>
                         <Button variant ='secondary' onClick={handleUClose}>
                             Cancel
-                            </Button>               
+                        </Button>               
                     </Form>
                 </Modal.Body>
             </Modal>
@@ -264,10 +241,10 @@ export default function EventDetail () {
                     details != null ? (
                     <h1>
                         
-                        {details.data.artist}<br />
-                        Genre: {details.data.genre}<br />
-                        Ticket Price: ${details.data.price}<br />
-                        Ticket Limit: {details.data.ticket_limit}
+                        {details.data.name}<br />
+                        Location: {details.data.location}<br />
+                        Capacity: ${details.data.capacity}<br />
+                        
                         </h1>
                     ) : (
                         <h1>Data is not loaded</h1>

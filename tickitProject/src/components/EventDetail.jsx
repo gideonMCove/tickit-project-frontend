@@ -79,6 +79,7 @@ export default function EventDetail () {
             // const updatedEvent = await axios.get(`http://localhost:8000/events/${eventId}`)
             setDetails(formData)
             handleClose()
+            window.location.reload()
 
         } catch (error) {
             console.error('Error updating event!!!!')
@@ -304,7 +305,7 @@ export default function EventDetail () {
                         </Button>
                         <Button variant ='secondary' onClick={handleUClose}>
                             Cancel
-                            </Button>               
+                        </Button>               
                     </Form>
                 </Modal.Body>
             </Modal>
