@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './EventList.css'
 
@@ -5,7 +7,9 @@ export default function EventsList (props) {
 
     console.log(props)
 
-     let navigate = useNavigate()
+    let navigate = useNavigate()
+
+    // const [venues, setVenues] = useState([])
 
     const showEvent = (index) => {
         navigate(`/events/${index}`)
@@ -29,6 +33,21 @@ export default function EventsList (props) {
           return formattedDate
     }
 
+    // const formatVenues = () => {
+    //     try {
+    //         const res = await axios.get(`${url}`)
+    //         let matchingVenue = res.data.name
+    //         console.log(typeof matchingVenue)    
+    //         setVenue(matchingVenue)                   
+    //       } catch (error) {
+    //         console.error('Cannot load venue', error)
+    //       }
+    //     }
+
+    // useEffect(() => {
+    //     formatVenue(url)
+    //   }, [url])
+
     return (
         <div className = "EventList">
             <h2>Search results</h2>
@@ -44,7 +63,7 @@ export default function EventsList (props) {
                             <ul>
                                 <img src={event.image_url}/>
                                 {event.artist}
-                                {formatDate(event.date)}
+                                {formatDate(event.date)}                             
                             </ul>
                         </h1>
                     ))
