@@ -12,7 +12,7 @@ const SearchBar = (props) => {
         e.preventDefault()
         props.getEvents(e)
         props.getVenues(e)
-        navigate('/events')
+        navigate('/results')
     }
 
     return (
