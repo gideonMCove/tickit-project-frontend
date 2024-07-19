@@ -1,13 +1,51 @@
-import { useNavigate } from 'react-router-dom'
+
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import './EventList.css'
+
 
 export default function EventsList (props) {
 
     console.log(props)
 
-     let navigate = useNavigate()
+    //const [events, setEvents] = useState([])
+    let {eventId} = useParams()
+    let navigate = useNavigate()
+
+    // useEffect (() => {
+
+    //     console.log('useEffect')
+
+     
+        
+    //     const getEvents = async () => {
+    //         try{
+    //             const response = await axios.get(`http://localhost:8000/events/`)
+    //             setEvents(response)
+    //         } catch (error){
+    //             console.error('Cannot load events', error)
+    //         }
+    //     }
+    //     getEvents()
+    // },[events])
+
+    //console.log(events)
 
     const showEvent = (index) => {
+
+        navigate(`${index }`)
+    }
+
+    // console.log('events', events)
+    // if (events != ""){
+    //     console.log('events.data', events.data)
+    // }
+
+    return (
+        <div className = "EventList">
+            <h1>Upcoming Events</h1>
+
         navigate(`/events/${index}`)
     }
 
@@ -33,7 +71,9 @@ export default function EventsList (props) {
         <div className = "EventList">
             <h2>Search results</h2>
             <h2>Events</h2>
+
             {
+
                 props.events.length > 0 ? (
                     
                     props.events.map((event, index) => (
@@ -49,28 +89,9 @@ export default function EventsList (props) {
                         </h1>
                     ))
                 ) : (
-                    <h2>Loading events</h2>
+                    <h1>Events have yet to be loaded</h1>
                 )
             }
-            <h2>Venues</h2>
-            {
-                props.venues.length > 0 ? (
-                    
-                    props.venues.map((venue, index) => (
-                        
-                        <h1 className="map" key ={index} onClick={()=>showVenue(venue.id)} >
-                            {console.log('venue',venue)}
-
-                            <ul>
-                                {venue.name}
-                            </ul>
-                        </h1>
-                    ))
-                ) : (
-                    <h2>Loading venues</h2>
-                )
-            }
-
         </div>
     )
 }
