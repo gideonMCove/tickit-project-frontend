@@ -94,6 +94,18 @@ export default function EventDetail () {
         console.log('handleChange', formData)
     } 
 
+    const booleanChange = (e) => {
+       
+     
+       
+      
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.checked
+        })
+        console.log('booleanChange', formData)
+    } 
+
     // const postTest = async () => {
     //     console.log('Event ID:', eventId)
     //     console.log(`http://localhost:8000/events/${eventId}`)
@@ -274,7 +286,7 @@ export default function EventDetail () {
                                 defaultChecked={details.data.comedy ? true : false}
                                 name='comedy'
                                 value={Boolean(formData.comedy)}
-                                onChange={handleChange}
+                                onChange={booleanChange}
                                 
                             />
                         </Form.Group>
@@ -285,7 +297,7 @@ export default function EventDetail () {
                                 defaultChecked={details.data.concert ? true : false}
                                 name='concert'
                                 value={Boolean(formData.defaultChecked)}
-                                onChange={handleChange}
+                                onChange={booleanChange}
                                 required
                             />
                         </Form.Group>
@@ -296,7 +308,7 @@ export default function EventDetail () {
                                 defaultChecked={details.data.sport ? true : false}
                                 name='sport'
                                 value={Boolean(formData.sport)}
-                                onChange={handleChange}
+                                onChange={booleanChange}
                                 
                             />
                         </Form.Group>
